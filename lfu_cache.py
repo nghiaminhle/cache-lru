@@ -1,5 +1,18 @@
 from cache_item import CacheItem
 
+"""
+The algorithm is:
+- Build a double linked list
+- The first item is the least frequency item
+- The last item is the greates frequecy item
+- Once accessed a item, if it is not the last, increase frequency, then 
+move item to the end of list if it's frequency is greater or equal frequency of the last
+
+The idea behinds this algorithm is: if the last item is the greatest frequency item, don't need increase it
+'s frequency any more. By doing that, all items between the first and the last have the same frequency, and we're 
+easy to find the least frequency item -the first.
+
+"""
 class LFUCache:
     maps = {}
     size = 0
