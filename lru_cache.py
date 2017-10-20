@@ -19,7 +19,7 @@ class LRUCache:
         
         if key in self.maps:
             item = self.maps[key]            
-            self.__change_cache_order(item)
+            self.__move_to_end(item)
             item.value = value
         else:
             if (len(self.maps)==self.size):
@@ -33,14 +33,14 @@ class LRUCache:
     def get(self, key):
         if key in self.maps.keys():
             item = self.maps[key]
-            self.__change_cache_order(item)
+            self.__move_to_end(item)
             return item.value
         return None
 
     def remove(self, key):
         if key in self.maps.keys():
             item = self.maps[key]
-            self.__change_cache_order(item)
+            self.__move_to_end(item)
             if item.previous_item !=None:
                 self.last = item.previous_item
                 item.previous_item.next_item = None
@@ -50,7 +50,7 @@ class LRUCache:
                 self.last = None
             del self.maps[key]
     
-    def __change_cache_order(self, item):
+    def __move_to_end(self, item):
         if item.next_item == None:
             return
         item.next_item.previous_item = item.previous_item
